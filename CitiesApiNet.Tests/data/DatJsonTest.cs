@@ -1,19 +1,21 @@
 ﻿using System;
 using CitiesApiNet.data;
-using CitiesApiNet.Models;
 using Xunit;
 
-namespace CitiesApiNet.Tests
+namespace CitiesApiNet.Tests.data
 {
 
     public class DatJsonTest:IDisposable
     {
-
         private readonly IDataSourceCIty _dataJson;
+      
 
         public DatJsonTest()
         {
-             _dataJson = new DataJson(@"c:\temp\cities.json");
+         
+            _dataJson = new DataJson(ResourceHelper.GetResourceStream(@"cities.json"));
+
+          //  _dataJson = new DataJson(@"c:\temp\cities.json");
         }
 
 
@@ -84,5 +86,7 @@ namespace CitiesApiNet.Tests
         {
             _dataJson.Dispose();
         }
+
+       
     }
 }

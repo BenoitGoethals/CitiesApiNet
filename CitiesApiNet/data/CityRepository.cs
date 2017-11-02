@@ -42,5 +42,10 @@ namespace CitiesApiNet.data
             return _dataLayerDataSource.City(name);
 
         }
+
+        public void Dispose()
+        {
+            _dataLayerDataSource?.Dispose();
+        }
     }
 }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
+using VelocityDb;
 
 namespace CitiesApiNet.Models
 {
-    public class City
+    public class City : OptimizedPersistable
     {
         [JsonConstructor]
         public City(string country, string name, string lat, string lng)
