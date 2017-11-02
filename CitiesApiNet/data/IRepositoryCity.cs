@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CitiesApiNet.Models;
 
 namespace CitiesApiNet.data
 {
-    public interface IRepositoryCity
+    public interface IRepositoryCity : IDisposable
     {
         List<City> Cities();
         List<City> Cities(string countryCode);

@@ -1,28 +1,36 @@
 ﻿using System;
+using System.IO;
 using CitiesApiNet.data;
-using CitiesApiNet.Models;
+using CitiesApiNet.Tests.Properties;
 using Xunit;
-
 
 namespace CitiesApiNet.Tests.data
 {
-    public class CityRepositoryTests:IDisposable
+    public class CityRepositoryVelocityDbTest:IDisposable
     {
+        private readonly IRepositoryCity _repository;
 
-        private  IRepositoryCity _repository;
-
-        public CityRepositoryTests()
+        public CityRepositoryVelocityDbTest()
         {
-             _repository = new CityRepository(new DataJson(ResourceHelper.GetResourceStream(@"cities.json")));
+         //   string file = @"c:\temp\velecityDb";
+          //  if (Directory.Exists(file))
+            //    Directory.Delete(file, true); // remove our current systemDir and all its databases.
+            
+            DataJson dataJson = new DataJson(ResourceHelper.GetResourceStream(@"cities.json"));
+            var dataVelocityDb = new DataVelocityDb(@"dbvel"+Guid.NewGuid()); 
+        //    dataVelocityDb.Dispose();
+            dataVelocityDb.AddCity(dataJson.All());
+           
+            _repository = new CityRepository(dataVelocityDb);
         }
 
         [Fact()]
         public void CitiesTest()
         {
-           Assert.NotEmpty(_repository.Cities());
+            Assert.NotEmpty(_repository.Cities());
         }
 
-
+        
 
         [Fact]
         public void GetCityByNameTest()
@@ -52,7 +60,7 @@ namespace CitiesApiNet.Tests.data
       },
              */
 
-            Assert.True(_repository.Cities("AD").Count==7);
+            Assert.NotNull(_repository.Cities("AD"));
         }
 
         [Fact]
@@ -67,7 +75,6 @@ namespace CitiesApiNet.Tests.data
     },
              * 
              */
-
             Assert.Equal("les Escaldes", _repository.City(42.50729, longitute: 1.53414).Name);
         }
 
@@ -75,7 +82,7 @@ namespace CitiesApiNet.Tests.data
 
         public void Dispose()
         {
-            _repository = null;
+            _repository?.Dispose();
         }
     }
 }

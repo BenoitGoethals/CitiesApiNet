@@ -14,21 +14,45 @@ namespace CitiesApiNet.data
     {
         private  ConcurrentBag<City> _concurrentBag;
 
-        private readonly string _fileName;
+  
         
 
         public DataJson(string file)
         {
-            _fileName = file;
-            _concurrentBag = new ConcurrentBag<City>((IEnumerable<City>)DeserializJsonFile());
+        _concurrentBag = new ConcurrentBag<City>((IEnumerable<City>)DeserializJsonFile(file));
+        }
+
+        public DataJson(Stream stream)
+        {
+            
+            _concurrentBag = new ConcurrentBag<City>((IEnumerable<City>)DeserializJsonFile( stream));
+        }
+
+        public DataJson()
+        {
+           
         }
 
 
-        private List<City> DeserializJsonFile()
+        private List<City> DeserializJsonFile(string fileName)
         {
             List<City> list;
 
-            using (StreamReader file = File.OpenText(_fileName))
+            using (StreamReader file = File.OpenText(fileName))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                list = (List<City>)serializer.Deserialize(file, typeof(IList<City>));
+            }
+
+            return list;
+        }
+
+
+        private List<City> DeserializJsonFile(Stream stream)
+        {
+            List<City> list;
+
+            using (StreamReader file = new StreamReader(stream))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 list = (List<City>)serializer.Deserialize(file, typeof(IList<City>));
