@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using VelocityDb;
 
 namespace CitiesApiNet.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class City : OptimizedPersistable
     {
         [JsonConstructor]
@@ -30,14 +32,15 @@ namespace CitiesApiNet.Models
           
 
         }
-
+        [JsonProperty ]
         public string Country { get; set; }
+        [JsonProperty]
         public string Name { get; set; }
-       
+        [JsonProperty]
         public string Lat { get; set; }
-      
+        [JsonProperty]
         public string Lng { get; set; }
-
+        [JsonProperty]
         public string Mgrs { get; set; }
 
 
