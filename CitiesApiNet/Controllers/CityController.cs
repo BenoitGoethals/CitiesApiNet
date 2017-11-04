@@ -8,7 +8,7 @@ namespace CitiesApiNet.Controllers
 {
     public class CityController : ApiController
     {
-        private readonly IRepositoryCity _repositoryCity=new CityRepository(new DataJson());
+        private readonly IRepositoryCity _repositoryCity=new CityRepository(new DataJson(@"c:/temp/cities.json"));
 
         // GET api/values
         public IEnumerable<City> Get()

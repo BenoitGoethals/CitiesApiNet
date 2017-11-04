@@ -1,5 +1,6 @@
 ﻿using System;
 using CitiesApiNet.data;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace CitiesApiNet.Tests.data
@@ -79,7 +80,23 @@ namespace CitiesApiNet.Tests.data
 
 
 
+        [Fact]
+        public void GetCityByCountrySerializeTest()
+        {
+            /*
+             {
+        "country": "AD",
+        "name": "les Escaldes",
+        "lat": "42.50729",
+        "lng": "1.53414"
+      },
+             */
+            JsonSerializerSettings jss = new JsonSerializerSettings();
+            jss.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            Assert.NotNull(_dataJson.Cities("AD"));
+            String s = JsonConvert.SerializeObject(_dataJson.Cities("AD"),jss);
 
+        }
 
 
         public void Dispose()
