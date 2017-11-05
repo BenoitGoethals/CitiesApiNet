@@ -26,6 +26,9 @@ namespace CitiesApiNet
             );
        //     config.Formatters.Clear(); //because there are defaults of XML..
          //   config.Formatters.Add(new JsonMediaTypeFormatter());
+        
+
+
         }
     }
 }
