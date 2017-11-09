@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using CitiesApiNet.data;
+using CitiesApiNet.Models;
 using CitiesApiNet.Tests.Properties;
+using NFluent;
 using Xunit;
+using Xunit.Should;
 
 namespace CitiesApiNet.Tests.data
 {
@@ -27,7 +31,9 @@ namespace CitiesApiNet.Tests.data
         [Fact()]
         public void CitiesTest()
         {
+            Check.That(_repository.Cities()).IsInstanceOf<List<City>>();
             Assert.NotEmpty(_repository.Cities());
+          
         }
 
         

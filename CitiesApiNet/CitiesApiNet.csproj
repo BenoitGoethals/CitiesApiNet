@@ -263,7 +263,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="data\CityRepository.cs" />
     <Compile Include="data\DataJson.cs" />
     <Compile Include="data\DataVelocityDB.cs" />
